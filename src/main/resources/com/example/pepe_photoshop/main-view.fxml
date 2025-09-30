@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pepe_photoshop.MainView">
+<AnchorPane fx:id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pepe_photoshop.MainView">
    <children>
       <MenuBar layoutY="2.0" minHeight="25.0" prefHeight="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Load image" />
+              <MenuItem mnemonicParsing="false" onAction="#loadImage" text="Load image" />
               <MenuItem mnemonicParsing="false" text="Save image" />
             </items>
           </Menu>
@@ -29,5 +30,6 @@
           <Menu mnemonicParsing="false" text="Exit" />
         </menus>
       </MenuBar>
+      <ImageView fx:id="ImageView" layoutX="14.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="35.0" AnchorPane.leftAnchor="10.0" />
    </children>
 </AnchorPane>
