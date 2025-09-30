@@ -30,6 +30,6 @@
           <Menu mnemonicParsing="false" text="Exit" />
         </menus>
       </MenuBar>
-      <ImageView fx:id="ImageView" layoutX="14.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="35.0" AnchorPane.leftAnchor="10.0" />
+      <ImageView fx:id="ImageView" layoutX="14.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="35.0" />
    </children>
 </AnchorPane>

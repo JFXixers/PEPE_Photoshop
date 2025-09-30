@@ -21,8 +21,6 @@ public class MainView {
 
         Image image = new Image(fileChooser.showOpenDialog(AnchorPane.getScene().getWindow()).toURI().toString());
 
-        ImageView.setFitHeight(image.getHeight());
-        ImageView.setFitWidth(image.getWidth());
         ImageView.setImage(image);
     }
 }
