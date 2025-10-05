@@ -7,6 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -47,6 +48,30 @@ public class MainView {
         try {
             ImageIO.write(buferedImg, format, fileToSave);
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void negativeFilter() {
+        try {
+            Image imageToNegative = ImageView.getImage();
+            BufferedImage bufferedImageToNegative = SwingFXUtils.fromFXImage(imageToNegative, null);
+            int imageNegativeWidth = bufferedImageToNegative.getWidth();
+            int imageNegativeHeight = bufferedImageToNegative.getHeight();
+            for (int x=0;x<imageNegativeWidth;x++) {
+                for (int y=0;y<imageNegativeHeight;y++){
+                    int rgbBuffered = bufferedImageToNegative.getRGB(x, y);
+                    Color pixelColor = new Color(rgbBuffered);
+                    int r = 255 - pixelColor.getRed();
+                    int g = 255 - pixelColor.getGreen();
+                    int b = 255 - pixelColor.getBlue();
+                    Color colorForPixel = new Color(r, g, b);
+                    bufferedImageToNegative.setRGB(x, y, colorForPixel.getRGB());
+                }
+            }
+            Image negativeImage = SwingFXUtils.toFXImage(bufferedImageToNegative, null);
+            ImageView.setImage(negativeImage);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

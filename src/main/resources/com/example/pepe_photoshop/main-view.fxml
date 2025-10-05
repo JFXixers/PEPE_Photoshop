@@ -16,7 +16,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Filters">
             <items>
-              <MenuItem mnemonicParsing="false" text="negative" />
+              <MenuItem mnemonicParsing="false" onAction="#negativeFilter" text="negative" />
               <MenuItem mnemonicParsing="false" text="Pixelizer" />
               <MenuItem mnemonicParsing="false" text="identity" />
               <MenuItem mnemonicParsing="false" text="threshold" />
