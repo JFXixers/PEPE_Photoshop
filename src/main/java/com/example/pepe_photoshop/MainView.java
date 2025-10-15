@@ -1,6 +1,7 @@
 package com.example.pepe_photoshop;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -21,6 +22,9 @@ public class MainView {
     @FXML
     private ImageView ImageView;
 
+    public static Image originalImage;
+    public static Image modifiedImage;
+
     @FXML
     public void loadImage() {
         FileChooser fileChooser = new FileChooser();
@@ -29,6 +33,8 @@ public class MainView {
         Image image = new Image(fileChooser.showOpenDialog(AnchorPane.getScene().getWindow()).toURI().toString());
 
         ImageView.setImage(image);
+        originalImage = ImageView.getImage();
+        modifiedImage = null;
     }
 
     @FXML
@@ -53,6 +59,19 @@ public class MainView {
         }
     }
 
+    @FXML
+    public void viewOriginalImage() {
+        ImageView.setImage(originalImage);
+    }
+
+    @FXML
+    public void viewModifiedImage() {
+        if (modifiedImage == null) {
+            return;
+        }
+        ImageView.setImage(modifiedImage);
+    }
+
     public void negativeFilter() {
         try {
             Image imageToNegative = ImageView.getImage();
@@ -72,6 +91,8 @@ public class MainView {
             }
             Image negativeImage = SwingFXUtils.toFXImage(bufferedImageToNegative, null);
             ImageView.setImage(negativeImage);
+
+            modifiedImage = ImageView.getImage();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

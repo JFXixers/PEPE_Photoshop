@@ -31,5 +31,12 @@
         </menus>
       </MenuBar>
       <ImageView fx:id="ImageView" layoutX="14.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="35.0" />
+       <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="140.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+           <fx:define>
+               <ToggleGroup fx:id="image_state" />
+           </fx:define>
+           <RadioButton mnemonicParsing="false" style="-fx-padding: 2 0 2 0;" text="Original Image" toggleGroup="$image_state" onAction="#viewOriginalImage" />
+           <RadioButton mnemonicParsing="false" selected="true" style="-fx-padding: 2 0 2 0;" text="Modified Image" toggleGroup="$image_state" onAction="#viewModifiedImage" />
+       </VBox>
    </children>
 </AnchorPane>
