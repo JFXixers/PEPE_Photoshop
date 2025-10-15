@@ -36,17 +36,18 @@ public class MainView {
         Image imageToSave = ImageView.getImage();
 
         FileChooser fileChooserForSave = new FileChooser();
-        fileChooserForSave.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.bmp", "png"));
+        fileChooserForSave.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG images","*.png"));
         fileChooserForSave.setTitle("Save image");
+        fileChooserForSave.setInitialFileName("my_image.png");
         File fileToSave = fileChooserForSave.showSaveDialog(AnchorPane.getScene().getWindow());
         String nameOfFileToSafe = fileToSave.getName();
 
         int indexOfDot = nameOfFileToSafe.lastIndexOf(".");
         String format = nameOfFileToSafe.substring(indexOfDot+1);
 
-        BufferedImage buferedImg = SwingFXUtils.fromFXImage(imageToSave, null);
+        BufferedImage bufferedImg = SwingFXUtils.fromFXImage(imageToSave, null);
         try {
-            ImageIO.write(buferedImg, format, fileToSave);
+            ImageIO.write(bufferedImg, format, fileToSave);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
