@@ -28,7 +28,7 @@
           </Menu>
           <Menu mnemonicParsing="false" onShown="#aboutApplication" text="About">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                  <MenuItem mnemonicParsing="false" text="DebugItem" />
                </items></Menu>
           <Menu mnemonicParsing="false" onShown="#closeApplication" text="Exit">
                <items>
@@ -36,13 +36,24 @@
                </items></Menu>
         </menus>
       </MenuBar>
-      <ImageView fx:id="ImageView" layoutX="14.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="35.0" />
-       <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="140.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
-           <RadioButton mnemonicParsing="false" onAction="#viewOriginalImage" style="-fx-padding: 2 0 2 0;" text="Original Image">
-            <toggleGroup>
-               <ToggleGroup fx:id="image_state" />
-            </toggleGroup></RadioButton>
-           <RadioButton mnemonicParsing="false" onAction="#viewModifiedImage" selected="true" style="-fx-padding: 2 0 2 0;" text="Modified Image" toggleGroup="$image_state" />
-       </VBox>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+         <right>
+             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="140.0" BorderPane.alignment="CENTER" style="-fx-padding: 0 0 0 20;">
+                 <RadioButton mnemonicParsing="false" onAction="#viewOriginalImage" style="-fx-padding: 2 0 2 0;" text="Original Image">
+                  <toggleGroup>
+                     <ToggleGroup fx:id="image_state" />
+                  </toggleGroup>
+               </RadioButton>
+                 <RadioButton mnemonicParsing="false" onAction="#viewModifiedImage" selected="true" style="-fx-padding: 2 0 2 0;" text="Modified Image" toggleGroup="$image_state" />
+             </VBox>
+         </right>
+         <center>
+            <Pane fx:id="ImagePane" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="ImageView" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>

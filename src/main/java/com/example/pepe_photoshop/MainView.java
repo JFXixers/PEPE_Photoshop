@@ -5,6 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,6 +17,9 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.stage.Stage;
 
 public class MainView {
+
+    @FXML
+    public Pane ImagePane;
 
     @FXML
     private AnchorPane AnchorPane;
@@ -36,6 +40,9 @@ public class MainView {
         ImageView.setImage(image);
         originalImage = ImageView.getImage();
         modifiedImage = null;
+
+        ImageView.fitWidthProperty().bind(ImagePane.widthProperty());
+        ImageView.fitHeightProperty().bind(ImagePane.heightProperty());
     }
 
     @FXML
