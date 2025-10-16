@@ -1,6 +1,7 @@
 package com.example.pepe_photoshop;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -62,10 +63,20 @@ public class MainView {
     // Due to JavaFX constraints this function can only be called on showing a menu.
     // Therefore, the Exit "button" needs a sub menu.
     // But since it is called on showing the menu, then the user will never get to see it.
+    // The about button is made the same way. If you find a better one you're free to improve! ☕
     @FXML
     public void closeApplication() {
         Stage stage = (Stage) AnchorPane.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    public void aboutApplication() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About");
+        alert.setHeaderText(null);
+        alert.setContentText("made by JFixers,\nthanks to ☕ and sleepless nights");
+        alert.show();
     }
 
     @FXML
