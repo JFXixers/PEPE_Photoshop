@@ -27,16 +27,19 @@
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="About" />
-          <Menu mnemonicParsing="false" text="Exit" />
+          <Menu mnemonicParsing="false" onShown="#closeApplication" text="Exit">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="DebugItem" />
+               </items></Menu>
         </menus>
       </MenuBar>
       <ImageView fx:id="ImageView" layoutX="14.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="35.0" />
        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="140.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
-           <fx:define>
+           <RadioButton mnemonicParsing="false" onAction="#viewOriginalImage" style="-fx-padding: 2 0 2 0;" text="Original Image">
+            <toggleGroup>
                <ToggleGroup fx:id="image_state" />
-           </fx:define>
-           <RadioButton mnemonicParsing="false" style="-fx-padding: 2 0 2 0;" text="Original Image" toggleGroup="$image_state" onAction="#viewOriginalImage" />
-           <RadioButton mnemonicParsing="false" selected="true" style="-fx-padding: 2 0 2 0;" text="Modified Image" toggleGroup="$image_state" onAction="#viewModifiedImage" />
+            </toggleGroup></RadioButton>
+           <RadioButton mnemonicParsing="false" onAction="#viewModifiedImage" selected="true" style="-fx-padding: 2 0 2 0;" text="Modified Image" toggleGroup="$image_state" />
        </VBox>
    </children>
 </AnchorPane>

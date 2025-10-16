@@ -1,7 +1,6 @@
 package com.example.pepe_photoshop;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -13,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.stage.Stage;
 
 public class MainView {
 
@@ -57,6 +57,15 @@ public class MainView {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    // Due to JavaFX constraints this function can only be called on showing a menu.
+    // Therefore, the Exit "button" needs a sub menu.
+    // But since it is called on showing the menu, then the user will never get to see it.
+    @FXML
+    public void closeApplication() {
+        Stage stage = (Stage) AnchorPane.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
