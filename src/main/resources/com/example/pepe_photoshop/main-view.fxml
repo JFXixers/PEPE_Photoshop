@@ -5,55 +5,43 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane fx:id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pepe_photoshop.MainView">
-   <children>
-      <MenuBar layoutY="2.0" minHeight="25.0" prefHeight="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#loadImage" text="Load image" />
-              <MenuItem mnemonicParsing="false" onAction="#saveImage" text="Save image" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Filters">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#negativeFilter" text="negative" />
-              <MenuItem mnemonicParsing="false" text="Pixelizer" />
-              <MenuItem mnemonicParsing="false" text="identity" />
-              <MenuItem mnemonicParsing="false" text="threshold" />
-              <MenuItem mnemonicParsing="false" text="OldStyleFilter" />
-              <MenuItem mnemonicParsing="false" text="BW filter" />
-              <MenuItem mnemonicParsing="false" text="Vignette" />
-              <MenuItem mnemonicParsing="false" text="Colorizer" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" onShown="#aboutApplication" text="About">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="DebugItem" />
-               </items></Menu>
-          <Menu mnemonicParsing="false" onShown="#closeApplication" text="Exit">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="DebugItem" />
-               </items></Menu>
-        </menus>
-      </MenuBar>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
-         <right>
-             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="140.0" BorderPane.alignment="CENTER" style="-fx-padding: 0 0 0 20;">
-                 <RadioButton mnemonicParsing="false" onAction="#viewOriginalImage" style="-fx-padding: 2 0 2 0;" text="Original Image">
-                  <toggleGroup>
-                     <ToggleGroup fx:id="image_state" />
-                  </toggleGroup>
-               </RadioButton>
-                 <RadioButton mnemonicParsing="false" onAction="#viewModifiedImage" selected="true" style="-fx-padding: 2 0 2 0;" text="Modified Image" toggleGroup="$image_state" />
-             </VBox>
-         </right>
-         <center>
+    <MenuBar layoutY="2.0" minHeight="25.0" prefHeight="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Menu mnemonicParsing="false" text="File">
+            <MenuItem mnemonicParsing="false" onAction="#loadImage" text="Load image"/>
+            <MenuItem mnemonicParsing="false" onAction="#saveImage" text="Save image"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Filters">
+            <MenuItem mnemonicParsing="false" onAction="#negativeFilter" text="negative"/>
+            <MenuItem mnemonicParsing="false" text="Pixelizer"/>
+            <MenuItem mnemonicParsing="false" text="identity"/>
+            <MenuItem mnemonicParsing="false" text="threshold"/>
+            <MenuItem mnemonicParsing="false" text="OldStyleFilter"/>
+            <MenuItem mnemonicParsing="false" text="BW filter"/>
+            <MenuItem mnemonicParsing="false" text="Vignette"/>
+            <MenuItem mnemonicParsing="false" text="Colorizer"/>
+        </Menu>
+        <Menu mnemonicParsing="false" onShown="#aboutApplication" text="About">
+            <MenuItem mnemonicParsing="false" text="DebugItem"/>
+        </Menu>
+        <Menu mnemonicParsing="false" onShown="#closeApplication" text="Exit">
+            <MenuItem mnemonicParsing="false" text="DebugItem"/>
+        </Menu>
+    </MenuBar>
+    <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+        <right>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="140.0" BorderPane.alignment="CENTER" style="-fx-padding: 0 0 0 20;">
+                <RadioButton mnemonicParsing="false" onAction="#viewOriginalImage" style="-fx-padding: 2 0 2 0;" text="Original Image">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="image_state"/>
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton mnemonicParsing="false" onAction="#viewModifiedImage" selected="true" style="-fx-padding: 2 0 2 0;" text="Modified Image" toggleGroup="$image_state"/>
+            </VBox>
+        </right>
+        <center>
             <Pane fx:id="ImagePane" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fx:id="ImageView" pickOnBounds="true" preserveRatio="true" />
-               </children>
+                <ImageView fx:id="ImageView" pickOnBounds="true" preserveRatio="true"/>
             </Pane>
-         </center>
-      </BorderPane>
-   </children>
+        </center>
+    </BorderPane>
 </AnchorPane>
