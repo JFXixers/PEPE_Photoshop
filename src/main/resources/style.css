@@ -1,0 +1,9 @@
+.menu-item:armed,
+.menu-item:hover {
+    -fx-background-color: #B9B7B7;
+}
+
+.toggle-button:hover,
+.menu:hover {
+    -fx-background-color: #949494;
+}
