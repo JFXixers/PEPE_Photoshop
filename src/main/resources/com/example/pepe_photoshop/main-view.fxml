@@ -1,46 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pepe_photoshop.MainView">
-    <MenuBar layoutY="2.0" minHeight="25.0" prefHeight="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#loadImage" text="Load image"/>
-            <MenuItem mnemonicParsing="false" onAction="#saveImage" text="Save image"/>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Filters">
-            <MenuItem mnemonicParsing="false" onAction="#negativeFilter" text="negative"/>
-            <MenuItem mnemonicParsing="false" text="Pixelizer"/>
-            <MenuItem mnemonicParsing="false" text="identity"/>
-            <MenuItem mnemonicParsing="false" text="threshold"/>
-            <MenuItem mnemonicParsing="false" text="OldStyleFilter"/>
-            <MenuItem mnemonicParsing="false" text="BW filter"/>
-            <MenuItem mnemonicParsing="false" text="Vignette"/>
-            <MenuItem mnemonicParsing="false" text="Colorizer"/>
-        </Menu>
-        <Menu mnemonicParsing="false" onShown="#aboutApplication" text="About">
-            <MenuItem mnemonicParsing="false" text="DebugItem"/>
-        </Menu>
-        <Menu mnemonicParsing="false" onShown="#closeApplication" text="Exit">
-            <MenuItem mnemonicParsing="false" text="DebugItem"/>
-        </Menu>
-    </MenuBar>
-    <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+   <HBox prefHeight="0.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+          <MenuBar fx:id="MenuBar" minHeight="32.0" prefHeight="57.0" prefWidth="521.0" style="-fx-background-color: #B9B7B7;" HBox.hgrow="ALWAYS">
+              <Menu fx:id="MenuFile" mnemonicParsing="false" style="-fx-font-size: 18;" text="File">
+                  <MenuItem fx:id="MenuLoad" mnemonicParsing="false" onAction="#loadImage" text="Load image">
+                  <graphic>
+                     <ImageView fx:id="LoadImageIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../../../images/LoadFile.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </MenuItem>
+                  <MenuItem fx:id="MenuSave" mnemonicParsing="false" onAction="#saveImage" text="Save image">
+                  <graphic>
+                     <ImageView fx:id="SaveImageIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../../../images/SaveFile.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </MenuItem>
+              </Menu>
+              <Menu fx:id="MenuFilters" mnemonicParsing="false" style="-fx-font-size: 18;" text="Filters">
+                  <MenuItem mnemonicParsing="false" onAction="#negativeFilter" text="negative">
+                  <graphic>
+                     <ImageView fx:id="FilterNegativeIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../../../images/Negative.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </MenuItem>
+                  <MenuItem mnemonicParsing="false" text="Pixelizer">
+                  <graphic>
+                     <ImageView fx:id="FilterPixelizerIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../../../images/Pixelized.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </MenuItem>
+                  <MenuItem mnemonicParsing="false" text="identity" />
+                  <MenuItem mnemonicParsing="false" text="threshold" />
+                  <MenuItem mnemonicParsing="false" text="OldStyleFilter" />
+                  <MenuItem mnemonicParsing="false" text="BW filter" />
+                  <MenuItem mnemonicParsing="false" text="Vignette" />
+                  <MenuItem mnemonicParsing="false" text="Colorizer" />
+              </Menu>
+              <Menu fx:id="MenuAbout" mnemonicParsing="false" onShown="#aboutApplication" style="-fx-font-size: 18;" text="About">
+                  <MenuItem mnemonicParsing="false" text="DebugItem" />
+              </Menu>
+              <Menu fx:id="MenuExit" mnemonicParsing="false" onShown="#closeApplication" style="-fx-font-size: 18;" text="Exit">
+                  <MenuItem mnemonicParsing="false" text="DebugItem" />
+              </Menu>
+          </MenuBar>
+         <ToggleButton fx:id="DarkModeToggle" mnemonicParsing="false" onAction="#toggleDarkMode" prefHeight="44.0" prefWidth="130.0" style="-fx-background-color: #B9B7B7; -fx-background-radius: 0;" text="Light">
+            <graphic>
+               <ImageView fx:id="DarkModeIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../../images/LightMode.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+            <HBox.margin>
+               <Insets />
+            </HBox.margin>
+            <font>
+               <Font size="18.0" />
+            </font>
+         </ToggleButton>
+      </children>
+      <padding>
+         <Insets left="-10.0" />
+      </padding>
+   </HBox>
+    <BorderPane layoutY="40.0" prefHeight="360.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
         <right>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="140.0" BorderPane.alignment="CENTER" style="-fx-padding: 0 0 0 20;">
-                <RadioButton mnemonicParsing="false" onAction="#viewOriginalImage" style="-fx-padding: 2 0 2 0;" text="Original Image">
+            <VBox fx:id="SideBar" alignment="CENTER_LEFT" prefHeight="375.0" prefWidth="178.0" style="-fx-background-color: #EAE5E4;" BorderPane.alignment="CENTER">
+                <RadioButton fx:id="OriginalImageRadio" mnemonicParsing="false" onAction="#viewOriginalImage" style="-fx-padding: 2 0 2 0;" text="Original Image">
                     <toggleGroup>
-                        <ToggleGroup fx:id="image_state"/>
+                        <ToggleGroup fx:id="image_state" />
                     </toggleGroup>
+               <graphic>
+                  <ImageView fx:id="OriginalImage" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/Original.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                 </RadioButton>
-                <RadioButton mnemonicParsing="false" onAction="#viewModifiedImage" selected="true" style="-fx-padding: 2 0 2 0;" text="Modified Image" toggleGroup="$image_state"/>
+                <RadioButton fx:id="ModifiedImageRadio" mnemonicParsing="false" onAction="#viewModifiedImage" selected="true" style="-fx-padding: 2 0 2 0;" text="Modified Image" toggleGroup="$image_state">
+               <graphic>
+                  <ImageView fx:id="ModifiedImage" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/Modified.png" />
+                     </image>
+                  </ImageView>
+               </graphic></RadioButton>
+            <BorderPane.margin>
+               <Insets />
+            </BorderPane.margin>
+            <padding>
+               <Insets left="20.0" />
+            </padding>
             </VBox>
         </right>
         <center>
-            <Pane fx:id="ImagePane" BorderPane.alignment="CENTER">
-                <ImageView fx:id="ImageView" pickOnBounds="true" preserveRatio="true"/>
+            <Pane fx:id="ImagePane" style="-fx-background-color: #FFF5F2;" BorderPane.alignment="CENTER">
+                <ImageView fx:id="ImageView" pickOnBounds="true" preserveRatio="true" />
             </Pane>
         </center>
     </BorderPane>

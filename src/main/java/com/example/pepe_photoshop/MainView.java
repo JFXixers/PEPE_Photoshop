@@ -1,11 +1,16 @@
 package com.example.pepe_photoshop;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -13,6 +18,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.stage.Stage;
 
@@ -22,10 +29,47 @@ public class MainView {
     private Pane ImagePane;
 
     @FXML
+    public VBox SideBar;
+    @FXML
+    public MenuBar MenuBar;
+
+    @FXML
+    public Menu MenuFile;
+    @FXML
+    public ImageView LoadImageIcon;
+    @FXML
+    public ImageView SaveImageIcon;
+
+    @FXML
+    public Menu MenuFilters;
+    @FXML
+    public ImageView FilterNegativeIcon;
+    @FXML
+    public ImageView FilterPixelizerIcon;
+
+    @FXML
+    public Menu MenuAbout;
+    @FXML
+    public Menu MenuExit;
+    @FXML
+    public RadioButton OriginalImageRadio;
+    @FXML
+    public ImageView OriginalImage;
+    @FXML
+    public RadioButton ModifiedImageRadio;
+    @FXML
+    public ImageView ModifiedImage;
+
+    @FXML
     private AnchorPane AnchorPane;
 
     @FXML
     private ImageView ImageView;
+
+    @FXML
+    private ToggleButton DarkModeToggle;
+    @FXML
+    private ImageView DarkModeIcon;
 
     public static Image originalImage;
     public static Image modifiedImage;
@@ -117,5 +161,164 @@ public class MainView {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static final Map<String, Paint> LightModeColors = Map.ofEntries(
+            Map.entry("imageBackground", Paint.valueOf("#FFF5F2")),
+            Map.entry("sidebarBackground", Paint.valueOf("#EAE5E4")),
+            Map.entry("menuBackground", Paint.valueOf("#B9B7B7"))
+    );
+
+    public static final Map<String, Paint> DarkModeColors = Map.ofEntries(
+            Map.entry("imageBackground", Paint.valueOf("#4e5b67")),
+            Map.entry("sidebarBackground", Paint.valueOf("#384754")),
+            Map.entry("menuBackground", Paint.valueOf("#1f2d3b"))
+    );
+
+
+    @FXML
+    public void toggleDarkMode() {
+        if (DarkModeToggle.isSelected()) {
+            DarkModeToggle.setText("Dark");
+            DarkModeIcon.setImage(new Image(getClass().getResource("/images/DarkMode.png").toExternalForm()));
+
+            ImagePane.setBackground(new Background(new BackgroundFill(DarkModeColors.get("imageBackground"), new CornerRadii(0), Insets.EMPTY)));
+            SideBar.setBackground(new Background(new BackgroundFill(DarkModeColors.get("sidebarBackground"), new CornerRadii(0), Insets.EMPTY)));
+            MenuBar.setBackground(new Background(new BackgroundFill(DarkModeColors.get("menuBackground"), new CornerRadii(0), Insets.EMPTY)));
+            DarkModeToggle.setStyle(
+                    "-fx-background-color: #" + DarkModeColors.get("menuBackground").toString().substring(2, 8) + ";" +
+                            "-fx-background-radius: 0;"
+            );
+            DarkModeToggle.setTextFill(Paint.valueOf("#ffffff"));
+            MenuFile.setStyle("-fx-font-size: 18px;-fx-text-base-color: #ffffff;");
+            MenuFilters.setStyle("-fx-font-size: 18px;-fx-text-base-color: #ffffff;");
+            MenuAbout.setStyle("-fx-font-size: 18px;-fx-text-base-color: #ffffff;");
+            MenuExit.setStyle("-fx-font-size: 18px;-fx-text-base-color: #ffffff;");
+
+            OriginalImageRadio.setStyle("-fx-text-fill: #ffffff;-fx-padding: 2 0 2 0;");
+            OriginalImage.setImage(new Image(getClass().getResource("/images/OriginalLight.png").toExternalForm()));
+            ModifiedImageRadio.setStyle("-fx-text-fill: #ffffff;-fx-padding: 2 0 2 0;");
+            ModifiedImage.setImage(new Image(getClass().getResource("/images/ModifiedLight.png").toExternalForm()));
+
+            MenuFile.setOnShowing(e -> {
+                MenuFile.getItems().forEach(item -> {
+                    item.getParentPopup().setStyle("-fx-background-color: #" + DarkModeColors.get("sidebarBackground").toString().substring(2, 8) + ";");
+                });
+            });
+            MenuFilters.setOnShowing(e -> {
+                MenuFilters.getItems().forEach(item -> {
+                    item.getParentPopup().setStyle("-fx-background-color: #" + DarkModeColors.get("sidebarBackground").toString().substring(2, 8) + ";");
+                });
+            });
+            MenuAbout.setOnShowing(e -> {
+                MenuAbout.getItems().forEach(item -> {
+                    item.getParentPopup().setStyle("-fx-background-color: #" + DarkModeColors.get("sidebarBackground").toString().substring(2, 8) + ";");
+                });
+            });
+            MenuExit.setOnShowing(e -> {
+                MenuExit.getItems().forEach(item -> {
+                    item.getParentPopup().setStyle("-fx-background-color: #" + DarkModeColors.get("sidebarBackground").toString().substring(2, 8) + ";");
+                });
+            });
+
+            LoadImageIcon.setImage(new Image(getClass().getResource("/images/LoadFileLight.png").toExternalForm()));
+            SaveImageIcon.setImage(new Image(getClass().getResource("/images/SaveFileLight.png").toExternalForm()));
+
+            FilterNegativeIcon.setImage(new Image(getClass().getResource("/images/NegativeLight.png").toExternalForm()));
+            FilterPixelizerIcon.setImage(new Image(getClass().getResource("/images/PixelizedLight.png").toExternalForm()));
+
+        } else {
+            DarkModeToggle.setText("Light");
+            DarkModeIcon.setImage(new Image(getClass().getResource("/images/LightMode.png").toExternalForm()));
+
+            ImagePane.setBackground(new Background(new BackgroundFill(LightModeColors.get("imageBackground"), new CornerRadii(0), Insets.EMPTY)));
+            SideBar.setBackground(new Background(new BackgroundFill(LightModeColors.get("sidebarBackground"), new CornerRadii(0), Insets.EMPTY)));
+            MenuBar.setBackground(new Background(new BackgroundFill(LightModeColors.get("menuBackground"), new CornerRadii(0), Insets.EMPTY)));
+            DarkModeToggle.setStyle(
+                    "-fx-background-color: #" + LightModeColors.get("menuBackground").toString().substring(2, 8) + ";" +
+                            "-fx-background-radius: 0;"
+            );
+            DarkModeToggle.setTextFill(Paint.valueOf("#000000"));
+            MenuFile.setStyle("-fx-font-size: 18px;-fx-text-base-color: #000000;");
+            MenuFilters.setStyle("-fx-font-size: 18px;-fx-text-base-color: #000000;");
+            MenuAbout.setStyle("-fx-font-size: 18px;-fx-text-base-color: #000000;");
+            MenuExit.setStyle("-fx-font-size: 18px;-fx-text-base-color: #000000;");
+
+            OriginalImageRadio.setStyle("-fx-text-fill: #000000;-fx-padding:  2 0 2 0;");
+            OriginalImage.setImage(new Image(getClass().getResource("/images/Original.png").toExternalForm()));
+            ModifiedImageRadio.setStyle("-fx-text-fill: #000000;-fx-padding:  2 0 2 0;");
+            ModifiedImage.setImage(new Image(getClass().getResource("/images/Modified.png").toExternalForm()));
+
+            MenuFile.setOnShowing(e -> {
+                MenuFile.getItems().forEach(item -> {
+                    item.getParentPopup().setStyle("-fx-background-color: #" + LightModeColors.get("sidebarBackground").toString().substring(2, 8) + ";");
+                });
+            });
+            MenuFilters.setOnShowing(e -> {
+                MenuFilters.getItems().forEach(item -> {
+                    item.getParentPopup().setStyle("-fx-background-color: #" + LightModeColors.get("sidebarBackground").toString().substring(2, 8) + ";");
+                });
+            });
+            MenuAbout.setOnShowing(e -> {
+                MenuAbout.getItems().forEach(item -> {
+                    item.getParentPopup().setStyle("-fx-background-color: #" + LightModeColors.get("sidebarBackground").toString().substring(2, 8) + ";");
+                });
+            });
+            MenuExit.setOnShowing(e -> {
+                MenuExit.getItems().forEach(item -> {
+                    item.getParentPopup().setStyle("-fx-background-color: #" + LightModeColors.get("sidebarBackground").toString().substring(2, 8) + ";");
+                });
+            });
+
+            LoadImageIcon.setImage(new Image(getClass().getResource("/images/LoadFile.png").toExternalForm()));
+            SaveImageIcon.setImage(new Image(getClass().getResource("/images/SaveFile.png").toExternalForm()));
+
+            FilterNegativeIcon.setImage(new Image(getClass().getResource("/images/Negative.png").toExternalForm()));
+            FilterPixelizerIcon.setImage(new Image(getClass().getResource("/images/Pixelized.png").toExternalForm()));
+        }
+    }
+
+
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+    @FXML
+    public void initialize() {
+        // Make the title bar draggable
+        MenuBar.setOnMousePressed((MouseEvent event) -> {
+            Stage stage = (Stage) MenuBar.getScene().getWindow();
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        MenuBar.setOnMouseDragged((MouseEvent event) -> {
+            Stage stage = (Stage) MenuBar.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
+
+
+
+
+        MenuFile.setOnShowing(e -> {
+            MenuFile.getItems().forEach(item -> {
+                item.getParentPopup().setStyle("-fx-background-color: #" + LightModeColors.get("sidebarBackground").toString().substring(2, 8) + ";");
+            });
+        });
+        MenuFilters.setOnShowing(e -> {
+            MenuFilters.getItems().forEach(item -> {
+                item.getParentPopup().setStyle("-fx-background-color: #" + LightModeColors.get("sidebarBackground").toString().substring(2, 8) + ";");
+            });
+        });
+        MenuAbout.setOnShowing(e -> {
+            MenuAbout.getItems().forEach(item -> {
+                item.getParentPopup().setStyle("-fx-background-color: #" + LightModeColors.get("sidebarBackground").toString().substring(2, 8) + ";");
+            });
+        });
+        MenuExit.setOnShowing(e -> {
+            MenuExit.getItems().forEach(item -> {
+                item.getParentPopup().setStyle("-fx-background-color: #" + LightModeColors.get("sidebarBackground").toString().substring(2, 8) + ";");
+            });
+        });
     }
 }
