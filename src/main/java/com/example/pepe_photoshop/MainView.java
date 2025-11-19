@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 public class MainView {
 
     @FXML
-    public Pane ImagePane;
+    private Pane ImagePane;
 
     @FXML
     public VBox SideBar;
@@ -74,10 +74,9 @@ public class MainView {
     public static Image originalImage;
     public static Image modifiedImage;
 
-    @FXML
     public void loadImage() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.bmp"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.bmp", "*.png"));
 
         Image image = new Image(fileChooser.showOpenDialog(AnchorPane.getScene().getWindow()).toURI().toString());
 
@@ -89,7 +88,6 @@ public class MainView {
         ImageView.fitHeightProperty().bind(ImagePane.heightProperty());
     }
 
-    @FXML
     public void saveImage() {
         Image imageToSave = ImageView.getImage();
 
@@ -115,13 +113,11 @@ public class MainView {
     // Therefore, the Exit "button" needs a sub menu.
     // But since it is called on showing the menu, then the user will never get to see it.
     // The about button is made the same way. If you find a better one you're free to improve! ☕
-    @FXML
     public void closeApplication() {
         Stage stage = (Stage) AnchorPane.getScene().getWindow();
         stage.close();
     }
 
-    @FXML
     public void aboutApplication() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About");
@@ -130,12 +126,10 @@ public class MainView {
         alert.show();
     }
 
-    @FXML
     public void viewOriginalImage() {
         ImageView.setImage(originalImage);
     }
 
-    @FXML
     public void viewModifiedImage() {
         if (modifiedImage == null) {
             return;
