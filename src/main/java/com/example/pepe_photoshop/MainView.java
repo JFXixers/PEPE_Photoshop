@@ -3,6 +3,7 @@ package com.example.pepe_photoshop;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.RadioButton;
@@ -22,6 +23,8 @@ import java.util.Map;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.stage.Stage;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 public class MainView {
 
@@ -159,6 +162,52 @@ public class MainView {
 
             modifiedImage = ImageView.getImage();
         } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void makeSliderForPixelize(){
+        PauseTransition delay = new PauseTransition(Duration.millis(50));
+        Slider sliderForPixelize = new Slider();
+        sliderForPixelize.setMin(0);
+        sliderForPixelize.setMax(100);
+        sliderForPixelize.setValue(20);
+        sliderForPixelize.setBlockIncrement(1);
+        sliderForPixelize.setMajorTickUnit(1);
+        sliderForPixelize.setMinorTickCount(0);
+        sliderForPixelize.setSnapToTicks(true);
+        sliderForPixelize.valueProperty().addListener((obs, oldVal, newVal) -> {
+            delay.setOnFinished(e -> pixelizeFilter(newVal.intValue()));
+            delay.playFromStart();
+        });
+
+        SideBar.getChildren().add(new Label("Pixelizer:"));
+        SideBar.getChildren().add(sliderForPixelize);
+    }
+
+    public void pixelizeFilter(int factor){
+        try{
+            Image imageToPixelize = ImageView.getImage();
+            BufferedImage bufferedImageToPixelize = SwingFXUtils.fromFXImage(imageToPixelize, null);
+            int imagePixelizeWidth = bufferedImageToPixelize.getWidth();
+            int imagePixelizeHeight = bufferedImageToPixelize.getHeight();
+            for (int x=0;x<imagePixelizeWidth;x+=factor*2){
+                for (int y=0;y<imagePixelizeHeight;y+=factor*2){
+                    for (int a=x-factor; a<x+factor;a++){
+                        for (int b=y-factor;b<y+factor;b++){
+                            int getA = Math.min(bufferedImageToPixelize.getWidth()-1, Math.max(0, a));
+                            int getB = Math.min(bufferedImageToPixelize.getHeight()-1, Math.max(0, b));
+                            Color c = new Color(bufferedImageToPixelize.getRGB(x, y));
+                            bufferedImageToPixelize.setRGB(getA, getB, c.getRGB());
+                        }
+                    }
+
+                }
+            }
+            Image pixelizedImage = SwingFXUtils.toFXImage(bufferedImageToPixelize, null);
+            ImageView.setImage(pixelizedImage);
+
+            modifiedImage = ImageView.getImage();
+        } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
     }
