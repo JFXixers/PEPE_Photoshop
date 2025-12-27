@@ -212,6 +212,25 @@ public class MainView {
         }
     }
 
+    public BufferedImage makeColoredImage(){
+        BufferedImage bImage = new BufferedImage(600, 600, BufferedImage.TYPE_3BYTE_BGR);
+        for (int x=0;x<bImage.getWidth();x++){
+            for (int y=0;y<bImage.getHeight();y++){
+                bImage.setRGB(x, y, (new Color(x%70, y%200, (x+y)%100).getRGB()));
+            }
+        }
+        return bImage;
+    }
+
+    public void generateImage(){
+        BufferedImage bimg = makeColoredImage();
+        Image generatedImage = SwingFXUtils.toFXImage(bimg, null);
+        ImageView.setImage(generatedImage);
+        ImageView.fitWidthProperty().bind(ImagePane.widthProperty());
+        ImageView.fitHeightProperty().bind(ImagePane.heightProperty());
+
+    }
+
     public static final Map<String, Paint> LightModeColors = Map.ofEntries(
             Map.entry("imageBackground", Paint.valueOf("#FFF5F2")),
             Map.entry("sidebarBackground", Paint.valueOf("#EAE5E4")),

@@ -86,6 +86,7 @@
     <BorderPane layoutY="40.0" prefHeight="360.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
         <right>
             <VBox fx:id="SideBar" alignment="CENTER_LEFT" prefHeight="375.0" prefWidth="178.0" style="-fx-background-color: #EAE5E4;" BorderPane.alignment="CENTER">
+                <Button fx:id="GenerateButton" text="Generate Image" onAction="#generateImage"></Button>
                 <RadioButton fx:id="OriginalImageRadio" mnemonicParsing="false" onAction="#viewOriginalImage" style="-fx-padding: 2 0 2 0;" text="Original Image">
                     <toggleGroup>
                         <ToggleGroup fx:id="image_state" />
