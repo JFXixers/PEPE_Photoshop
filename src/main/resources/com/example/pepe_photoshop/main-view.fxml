@@ -50,7 +50,7 @@
                   </graphic>
                </MenuItem>
                   <MenuItem mnemonicParsing="false" text="identity" />
-                  <MenuItem mnemonicParsing="false" text="threshold" />
+                  <MenuItem mnemonicParsing="false" text="threshold" onAction="#filterThreshold"/>
                   <MenuItem mnemonicParsing="false" text="OldStyleFilter" />
                   <MenuItem mnemonicParsing="false" text="BW filter" />
                   <MenuItem mnemonicParsing="false" text="Vignette" />

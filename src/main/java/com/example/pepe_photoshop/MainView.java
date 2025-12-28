@@ -231,6 +231,31 @@ public class MainView {
 
     }
 
+    public void filterThreshold(){
+        BufferedImage bufferedImageToThreshold = SwingFXUtils.fromFXImage(ImageView.getImage(), null);
+        int black = Color.BLACK.getRGB();
+        int white = Color.WHITE.getRGB();
+        int threshold = 128;
+        for (int x = 0;x<bufferedImageToThreshold.getWidth();x++){
+            for (int y=0;y<bufferedImageToThreshold.getHeight();y++){
+                int rgb = bufferedImageToThreshold.getRGB(x, y);
+                int r = (rgb >> 16) & 0xFF;
+                int g = (rgb >> 8) & 0xFF;
+                int b = rgb & 0xFF;
+                int gray = (int)(0.299*r + 0.587*g + 0.114*b);
+                if (gray < threshold){
+                    bufferedImageToThreshold.setRGB(x, y, black);
+                } else{
+                    bufferedImageToThreshold.setRGB(x, y, white);
+                }
+            }
+        }
+        Image filteredThresholdImage = SwingFXUtils.toFXImage(bufferedImageToThreshold, null);
+        ImageView.setImage(filteredThresholdImage);
+
+        modifiedImage = ImageView.getImage();
+    }
+
     public static final Map<String, Paint> LightModeColors = Map.ofEntries(
             Map.entry("imageBackground", Paint.valueOf("#FFF5F2")),
             Map.entry("sidebarBackground", Paint.valueOf("#EAE5E4")),
