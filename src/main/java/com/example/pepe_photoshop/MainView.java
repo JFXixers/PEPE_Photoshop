@@ -165,27 +165,10 @@ public class MainView {
             throw new RuntimeException(e);
         }
     }
-    public void makeSliderForPixelize(){
-        PauseTransition delay = new PauseTransition(Duration.millis(50));
-        Slider sliderForPixelize = new Slider();
-        sliderForPixelize.setMin(0);
-        sliderForPixelize.setMax(100);
-        sliderForPixelize.setValue(20);
-        sliderForPixelize.setBlockIncrement(1);
-        sliderForPixelize.setMajorTickUnit(1);
-        sliderForPixelize.setMinorTickCount(0);
-        sliderForPixelize.setSnapToTicks(true);
-        sliderForPixelize.valueProperty().addListener((obs, oldVal, newVal) -> {
-            delay.setOnFinished(e -> pixelizeFilter(newVal.intValue()));
-            delay.playFromStart();
-        });
 
-        SideBar.getChildren().add(new Label("Pixelizer:"));
-        SideBar.getChildren().add(sliderForPixelize);
-    }
-
-    public void pixelizeFilter(int factor){
+    public void pixelizeFilter(){
         try{
+            int factor = 5;
             Image imageToPixelize = ImageView.getImage();
             BufferedImage bufferedImageToPixelize = SwingFXUtils.fromFXImage(imageToPixelize, null);
             int imagePixelizeWidth = bufferedImageToPixelize.getWidth();

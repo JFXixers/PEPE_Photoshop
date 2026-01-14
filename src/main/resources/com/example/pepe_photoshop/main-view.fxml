@@ -40,7 +40,7 @@
                      </ImageView>
                   </graphic>
                </MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#makeSliderForPixelize" text="Pixelizer">
+                  <MenuItem mnemonicParsing="false" onAction="#pixelizeFilter" text="Pixelizer">
                   <graphic>
                      <ImageView fx:id="FilterPixelizerIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                         <image>
