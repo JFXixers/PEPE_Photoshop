@@ -9,7 +9,7 @@
 <AnchorPane fx:id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pepe_photoshop.MainView">
    <HBox prefHeight="0.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
-          <MenuBar fx:id="MenuBar" minHeight="32.0" prefHeight="57.0" prefWidth="521.0" style="-fx-background-color: #B9B7B7;" HBox.hgrow="ALWAYS">
+          <MenuBar fx:id="MenuBar" minHeight="32.0" prefHeight="57.0" style="-fx-background-color: #B9B7B7;" HBox.hgrow="ALWAYS">
               <Menu fx:id="MenuFile" mnemonicParsing="false" style="-fx-font-size: 18;" text="File">
                   <MenuItem fx:id="MenuLoad" mnemonicParsing="false" onAction="#loadImage" text="Load image">
                   <graphic>
@@ -50,7 +50,7 @@
                   </graphic>
                </MenuItem>
                   <MenuItem mnemonicParsing="false" text="identity" />
-                  <MenuItem mnemonicParsing="false" text="threshold" onAction="#filterThreshold"/>
+                  <MenuItem mnemonicParsing="false" onAction="#filterThreshold" text="threshold" />
                   <MenuItem mnemonicParsing="false" text="OldStyleFilter" />
                   <MenuItem mnemonicParsing="false" text="BW filter" />
                   <MenuItem mnemonicParsing="false" text="Vignette" />
@@ -63,6 +63,11 @@
                   <MenuItem mnemonicParsing="false" text="DebugItem" />
               </Menu>
           </MenuBar>
+          <Button fx:id="GenerateButton" onAction="#generateImage" text="Generate" prefHeight="44.0" prefWidth="130.0" style="-fx-background-color: #B9B7B7; -fx-background-radius: 0;">
+              <font>
+                  <Font size="18.0" />
+              </font>
+          </Button>
          <ToggleButton fx:id="DarkModeToggle" mnemonicParsing="false" onAction="#toggleDarkMode" prefHeight="44.0" prefWidth="130.0" style="-fx-background-color: #B9B7B7; -fx-background-radius: 0;" text="Light">
             <graphic>
                <ImageView fx:id="DarkModeIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -86,7 +91,6 @@
     <BorderPane layoutY="40.0" prefHeight="360.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
         <right>
             <VBox fx:id="SideBar" alignment="CENTER_LEFT" prefHeight="375.0" prefWidth="178.0" style="-fx-background-color: #EAE5E4;" BorderPane.alignment="CENTER">
-                <Button fx:id="GenerateButton" text="Generate Image" onAction="#generateImage"></Button>
                 <RadioButton fx:id="OriginalImageRadio" mnemonicParsing="false" onAction="#viewOriginalImage" style="-fx-padding: 2 0 2 0;" text="Original Image">
                     <toggleGroup>
                         <ToggleGroup fx:id="image_state" />

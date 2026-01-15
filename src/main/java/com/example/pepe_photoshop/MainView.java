@@ -3,7 +3,7 @@ package com.example.pepe_photoshop;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.RadioButton;
@@ -20,59 +20,31 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-
 import javafx.embed.swing.SwingFXUtils;
 import javafx.stage.Stage;
-import javafx.animation.PauseTransition;
-import javafx.util.Duration;
 
 public class MainView {
 
     @FXML
     private Pane ImagePane;
-
     @FXML
-    public VBox SideBar;
+    private VBox SideBar;
     @FXML
-    public MenuBar MenuBar;
-
+    private MenuBar MenuBar;
     @FXML
-    public Menu MenuFile;
+    private Menu MenuAbout, MenuExit, MenuFilters, MenuFile;
     @FXML
-    public ImageView LoadImageIcon;
-    @FXML
-    public ImageView SaveImageIcon;
-
-    @FXML
-    public Menu MenuFilters;
-    @FXML
-    public ImageView FilterNegativeIcon;
-    @FXML
-    public ImageView FilterPixelizerIcon;
-
-    @FXML
-    public Menu MenuAbout;
-    @FXML
-    public Menu MenuExit;
-    @FXML
-    public RadioButton OriginalImageRadio;
-    @FXML
-    public ImageView OriginalImage;
-    @FXML
-    public RadioButton ModifiedImageRadio;
-    @FXML
-    public ImageView ModifiedImage;
-
+    private RadioButton OriginalImageRadio, ModifiedImageRadio;
     @FXML
     private AnchorPane AnchorPane;
-
-    @FXML
-    private ImageView ImageView;
-
     @FXML
     private ToggleButton DarkModeToggle;
     @FXML
-    private ImageView DarkModeIcon;
+    private ImageView ModifiedImage, OriginalImage, DarkModeIcon, FilterNegativeIcon, FilterPixelizerIcon, ImageView, LoadImageIcon, SaveImageIcon;
+    @FXML
+    private Button GenerateButton;
+    @FXML
+    private ToggleGroup image_state;
 
     public static Image originalImage;
     public static Image modifiedImage;
@@ -161,6 +133,7 @@ public class MainView {
             ImageView.setImage(negativeImage);
 
             modifiedImage = ImageView.getImage();
+            image_state.selectToggle(ModifiedImageRadio);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -183,13 +156,13 @@ public class MainView {
                             bufferedImageToPixelize.setRGB(getA, getB, c.getRGB());
                         }
                     }
-
                 }
             }
             Image pixelizedImage = SwingFXUtils.toFXImage(bufferedImageToPixelize, null);
             ImageView.setImage(pixelizedImage);
 
             modifiedImage = ImageView.getImage();
+            image_state.selectToggle(ModifiedImageRadio);
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
@@ -211,7 +184,7 @@ public class MainView {
         ImageView.setImage(generatedImage);
         ImageView.fitWidthProperty().bind(ImagePane.widthProperty());
         ImageView.fitHeightProperty().bind(ImagePane.heightProperty());
-
+        originalImage = ImageView.getImage();
     }
 
     public void filterThreshold(){
@@ -237,6 +210,7 @@ public class MainView {
         ImageView.setImage(filteredThresholdImage);
 
         modifiedImage = ImageView.getImage();
+        image_state.selectToggle(ModifiedImageRadio);
     }
 
     public static final Map<String, Paint> LightModeColors = Map.ofEntries(
@@ -266,6 +240,11 @@ public class MainView {
                             "-fx-background-radius: 0;"
             );
             DarkModeToggle.setTextFill(Paint.valueOf("#ffffff"));
+            GenerateButton.setStyle(
+                    "-fx-background-color: #" + DarkModeColors.get("menuBackground").toString().substring(2, 8) + ";" +
+                            "-fx-background-radius: 0;"
+            );
+            GenerateButton.setTextFill(Paint.valueOf("#ffffff"));
             MenuFile.setStyle("-fx-font-size: 18px;-fx-text-base-color: #ffffff;");
             MenuFilters.setStyle("-fx-font-size: 18px;-fx-text-base-color: #ffffff;");
             MenuAbout.setStyle("-fx-font-size: 18px;-fx-text-base-color: #ffffff;");
@@ -315,6 +294,11 @@ public class MainView {
                             "-fx-background-radius: 0;"
             );
             DarkModeToggle.setTextFill(Paint.valueOf("#000000"));
+            GenerateButton.setStyle(
+                    "-fx-background-color: #" + LightModeColors.get("menuBackground").toString().substring(2, 8) + ";" +
+                            "-fx-background-radius: 0;"
+            );
+            GenerateButton.setTextFill(Paint.valueOf("#000000"));
             MenuFile.setStyle("-fx-font-size: 18px;-fx-text-base-color: #000000;");
             MenuFilters.setStyle("-fx-font-size: 18px;-fx-text-base-color: #000000;");
             MenuAbout.setStyle("-fx-font-size: 18px;-fx-text-base-color: #000000;");
@@ -372,9 +356,6 @@ public class MainView {
             stage.setX(event.getScreenX() - xOffset);
             stage.setY(event.getScreenY() - yOffset);
         });
-
-
-
 
         MenuFile.setOnShowing(e -> {
             MenuFile.getItems().forEach(item -> {
