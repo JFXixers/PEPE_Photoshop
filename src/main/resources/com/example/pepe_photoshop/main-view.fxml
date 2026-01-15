@@ -49,12 +49,7 @@
                      </ImageView>
                   </graphic>
                </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="identity" />
                   <MenuItem mnemonicParsing="false" onAction="#filterThreshold" text="threshold" />
-                  <MenuItem mnemonicParsing="false" text="OldStyleFilter" />
-                  <MenuItem mnemonicParsing="false" text="BW filter" />
-                  <MenuItem mnemonicParsing="false" text="Vignette" />
-                  <MenuItem mnemonicParsing="false" text="Colorizer" />
               </Menu>
               <Menu fx:id="MenuAbout" mnemonicParsing="false" onShown="#aboutApplication" style="-fx-font-size: 18;" text="About">
                   <MenuItem mnemonicParsing="false" text="DebugItem" />
